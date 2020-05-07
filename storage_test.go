@@ -45,7 +45,6 @@ func (suite *StorageTestSuite) setupStorageBackends() {
 		prefix := fmt.Sprintf("unittest/%s", timestamp)
 		s3Bucket := os.Getenv("TEST_STORAGE_AMAZON_BUCKET")
 		s3Region := os.Getenv("TEST_STORAGE_AMAZON_REGION")
-		gcsBucket := os.Getenv("TEST_STORAGE_GOOGLE_BUCKET")
 		ossBucket := os.Getenv("TEST_STORAGE_ALIBABA_BUCKET")
 		ossEndpoint := os.Getenv("TEST_STORAGE_ALIBABA_ENDPOINT")
 		osContainer := os.Getenv("TEST_STORAGE_OPENSTACK_CONTAINER")
@@ -59,9 +58,6 @@ func (suite *StorageTestSuite) setupStorageBackends() {
 		cosEndpoint := os.Getenv("TEST_STORAGE_TENCENT_ENDPOINT")
 		if s3Bucket != "" && s3Region != "" {
 			suite.StorageBackends["AmazonS3"] = Backend(NewAmazonS3Backend(s3Bucket, prefix, s3Region, "", ""))
-		}
-		if gcsBucket != "" {
-			suite.StorageBackends["GoogleCS"] = Backend(NewGoogleCSBackend(gcsBucket, prefix))
 		}
 		if ossBucket != "" {
 			suite.StorageBackends["AlibabaCloudOSS"] = Backend(NewAlibabaCloudOSSBackend(ossBucket, prefix, ossEndpoint, ""))
